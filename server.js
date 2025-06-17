@@ -198,6 +198,21 @@ userSchema.pre('save', async function(next) {
 const Role = mongoose.model('Role', roleSchema);
 const User = mongoose.model('User', userSchema);
 
+// ROOT ROUTE
+app.get('/', (req, res) => {
+  res.json({
+    message: 'MongoDB CRUD API Server',
+    version: '1.0.0',
+    endpoints: {
+      users: '/api/users',
+      roles: '/api/roles',
+      seed: '/api/seed',
+      docs: '/api-docs'
+    },
+    status: 'Server is running successfully!'
+  });
+});
+
 // ROLE ROUTES
 
 /**

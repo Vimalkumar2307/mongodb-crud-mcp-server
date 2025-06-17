@@ -1,0 +1,20 @@
+{
+  "models": [
+    {
+      "title": "Llama 3.2 1B (Local)",
+      "provider": "ollama",
+      "model": "llama3.2:1b",
+      "apiBase": "http://localhost:11434"
+    }
+  ],
+  "mcpServers": {
+    "mongodb-crud": {
+      "command": "node",
+      "args": ["d:/mongodb_crud_app/mcp-server.js"],
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "allowAnonymousTelemetry": false
+}
