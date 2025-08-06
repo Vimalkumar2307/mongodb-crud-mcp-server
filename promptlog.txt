@@ -1,0 +1,226 @@
+Microsoft Windows [Version 10.0.19045.5737]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\mongodb_crud_app>npm run test-ollama
+
+> crud-app-mongodb@1.0.0 test-ollama
+> node test-ollama-bridge.js        
+
+🧪 Running Ollama MCP Bridge Tests...
+
+🦙 Testing Ollama connection...
+✅ Ollama is running
+📦 Available models: llama3.2:latest, llama3.2:1b
+🍃 Testing MongoDB API connection...
+✅ MongoDB API is running
+📊 API Status: Server is running successfully!
+🔌 Testing MCP server...
+✅ MCP server can start
+🧠 Testing Ollama model: llama3.2...
+✅ Model is working
+🤖 Test response: Hello World
+
+📋 Test Results Summary:
+========================
+Ollama Connection: ✅ PASS
+MongoDB API: ✅ PASS
+Ollama Model: ✅ PASS
+MCP Server: ✅ PASS
+
+🎯 Overall Status:
+✅ All tests passed! You can run the bridge with:
+   node ollama-mcp-bridge.js
+
+D:\mongodb_crud_app>npm run ollama
+
+> crud-app-mongodb@1.0.0 ollama
+> node ollama-mcp-bridge.js
+
+🚀 Starting Ollama MCP Bridge...
+
+🦙 Ollama connected! Available models: llama3.2:latest, llama3.2:1b
+🔌 Starting MCP server...
+❌ MCP connection failed: The "path" argument must be of type string. Received undefined
+Failed to connect to MCP server. Exiting.
+MongoDB CRUD MCP server running on stdio
+^CTerminate batch job (Y/N)? n
+
+D:\mongodb_crud_app>npm run ollama-simple
+
+> crud-app-mongodb@1.0.0 ollama-simple
+> node simple-ollama-bridge.js
+
+🚀 Starting Simple Ollama Bridge...
+
+🦙 Ollama connected! Available models: llama3.2:latest, llama3.2:1b
+✅ MongoDB API is running
+
+🎉 Simple Ollama Bridge Ready!        
+💡 Powered by llama3.2 running locally
+
+📝 Try commands like:
+  • "Create a new user named John Smith with email john@test.com, password 123456, and admin role"
+  • "Show me all users in the system"
+  • "Seed the database with default data"
+  • "Create an admin role with all permissions"
+  • Type "exit" to quit
+
+🦙 Ollama >  Seed the database with default data
+🤔 Thinking...
+💬 AI Response: You want to seed the database with default data. Please note that this will overwrite any existing data in 
+your MongoDB collection.
+
+──────────────────────────────────────────────────
+🦙 Ollama >  Get all users from the database
+🤔 Thinking...
+🧠 AI Understanding: Retrieving a list of all users in the database
+🔧 API Call: GET /api/users
+❌ Error: Request failed with status code 404
+
+──────────────────────────────────────────────────
+🦙 Ollama >  npm run ollama-simple
+🤔 Thinking...
+💬 AI Response: I'm an AI assistant here to help you interact with the MongoDB CRUD API. You can make requests using natural language.
+
+To get started, what would you like to do? Do you want to create a new user, retrieve all users, or something else?        
+
+──────────────────────────────────────────────────
+🦙 Ollama >  Get all users from the database
+🤔 Thinking...
+💬 AI Response: You want to retrieve all users from the database. Please note that this will return a list of all users in 
+your system.
+
+──────────────────────────────────────────────────
+🦙 Ollama >  npm run ollama-simple
+🤔 Thinking...
+
+👋 Goodbye!
+
+D:\mongodb_crud_app>npm run ollama-simple
+
+> crud-app-mongodb@1.0.0 ollama-simple
+> node simple-ollama-bridge.js
+
+🚀 Starting Simple Ollama Bridge...
+
+🦙 Ollama connected! Available models: llama3.2:latest, llama3.2:1b
+✅ MongoDB API is running
+
+🎉 Simple Ollama Bridge Ready!
+💡 Powered by llama3.2 running locally
+
+📝 Try commands like:
+  • "Create a new user named John Smith with email john@test.com, password 123456, and admin role"
+  • "Show me all users in the system"
+  • "Seed the database with default data"
+  • "Create an admin role with all permissions"
+  • Type "exit" to quit
+
+🦙 Ollama >  Get all users
+🤔 Thinking...
+🧠 AI Understanding: Getting all users
+🔧 API Call: GET /api/users
+📋 Data: {}
+🔗 Making request: GET http://localhost:3000/api/api/users
+❌ Request failed: 404 Not Found
+❌ URL was: http://localhost:3000/api/api/users
+❌ Error: Request failed with status code 404
+
+──────────────────────────────────────────────────
+🦙 Ollama >  Get all users now
+🤔 Thinking...
+🧠 AI Understanding: Getting all users
+🔧 API Call: GET /api/users
+📋 Data: {}
+🔗 Making request: GET http://localhost:3000/api/api/users
+❌ Request failed: 404 Not Found
+❌ URL was: http://localhost:3000/api/api/users
+❌ Error: Request failed with status code 404
+
+──────────────────────────────────────────────────
+🦙 Ollama >
+👋 Goodbye!
+
+D:\mongodb_crud_app>npm run ollama-simple
+
+> crud-app-mongodb@1.0.0 ollama-simple
+> node simple-ollama-bridge.js
+
+🚀 Starting Simple Ollama Bridge...
+
+🦙 Ollama connected! Available models: llama3.2:latest, llama3.2:1b
+❌ MongoDB API connection failed: Request failed with status code 404
+💡 Make sure your API server is running: npm start
+Failed to connect to MongoDB API. Please make sure your API server is running.
+
+D:\mongodb_crud_app>
+
+D:\mongodb_crud_app>npm run ollama-simple
+
+> crud-app-mongodb@1.0.0 ollama-simple
+> node simple-ollama-bridge.js
+
+🚀 Starting Simple Ollama Bridge...
+
+🦙 Ollama connected! Available models: llama3.2:latest, llama3.2:1b
+✅ MongoDB API is running
+
+🎉 Simple Ollama Bridge Ready!
+💡 Powered by llama3.2 running locally
+
+📝 Try commands like:
+  • "Create a new user named John Smith with email john@test.com, password 123456, and admin role"
+  • "Show me all users in the system"
+  • "Seed the database with default data"
+  • "Create an admin role with all permissions"
+  • Type "exit" to quit
+
+🦙 Ollama >  Get all users
+🤔 Thinking...
+🧠 AI Understanding: Getting all users
+🔧 API Call: GET /api/users
+📋 Data: {}
+🔗 Making request: GET http://localhost:3000/api/users
+
+📊 Result:
+👥 Found 3 user(s):
+
+1. Admin User (admin@example.com) - admin
+2. John Doe (john.doe@example.com) - user
+3. Test User (test@example.com) - admin
+
+──────────────────────────────────────────────────
+🦙 Ollama > Add a user - vimalkumar and create an appropriate random email and  add him as admin
+🤔 Thinking...
+🧠 AI Understanding: 
+🔧 API Call: POST /api/users
+📋 Data: {
+  "firstName": "Vimalkumar",
+  "lastName": "",
+  "email": "vimalkumar@example.com",
+  "password": "password123",
+  "role": "admin"
+}
+🔗 Making request: POST http://localhost:3000/api/users
+❌ Request failed: 400 Bad Request
+❌ URL was: http://localhost:3000/api/users
+❌ Error: User validation failed: role: Cast to ObjectId failed for value "admin" (type string) at path "role" because of "B
+SONError", lastName: Path `lastName` is required.
+
+──────────────────────────────────────────────────
+🦙 Ollama >  Add a user - vimal kumar and create an appropriate random email and  add him as admin
+🤔 Thinking...
+🧠 AI Understanding: 
+🔧 API Call: POST /api/users
+📋 Data: {
+  "firstName": "Vimal",
+  "lastName": "Kumar",
+  "email": "vimalkumar@example.com",
+  "password": "password123",
+  "role": "admin"
+}
+🔗 Making request: POST http://localhost:3000/api/users
+❌ Request failed: 400 Bad Request
+❌ URL was: http://localhost:3000/api/users
+❌ Error: User validation failed: role: Cast to ObjectId failed for value "admin" (type string) at path "role" because of "B
+SONError"
