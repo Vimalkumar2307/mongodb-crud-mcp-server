@@ -115,18 +115,31 @@ def process_with_groq(query: str):
     
     system_prompt = """You are a database assistant. Convert natural language to JSON API commands.
 
+CRITICAL RULES FOR USER CREATION:
+1. When given a full name like "Annie Miller" or "John Doe", ALWAYS split into:
+   - firstName: first part (e.g., "Annie", "John")
+   - lastName: last part (e.g., "Miller", "Doe")
+2. NEVER use a "name" field - API requires firstName and lastName separately
+3. If password not provided, use: "default123"
+4. If email not provided, generate from name: firstname.lastname@example.com (lowercase)
+5. If role not specified, use: "user"
+
 Available operations:
 1. GET /api/users - Get all users
-2. GET /api/users/{id} - Get user by ID
-3. POST /api/users - Create user
-4. GET /api/roles - Get all roles
-5. POST /api/roles - Create role
+2. POST /api/users - Create user (MUST have: firstName, lastName, email, password, role)
+3. GET /api/roles - Get all roles
+4. POST /api/roles - Create role
+
+EXAMPLES:
+"show users" → {"action": "get_users", "data": {}, "explanation": "Fetching all users"}
+"create user Annie Miller as editor" → {"action": "create_user", "data": {"firstName": "Annie", "lastName": "Miller", "email": "annie.miller@example.com", "password": "default123", "role": "editor"}, "explanation": "Creating editor user Annie Miller"}
+"add John Doe" → {"action": "create_user", "data": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "password": "default123", "role": "user"}, "explanation": "Creating user John Doe"}
 
 Respond ONLY with valid JSON:
 {
-  "action": "get_users|create_user|get_roles|create_role",
+  "action": "action_name",
   "data": {...},
-  "explanation": "what you're doing"
+  "explanation": "brief description"
 }"""
 
     try:
