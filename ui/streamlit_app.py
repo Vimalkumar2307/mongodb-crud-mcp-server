@@ -210,7 +210,18 @@ with st.sidebar:
             if response.status_code == 200:
                 st.success("✅ Database seeded!")
                 result = response.json()
-                st.json(result)
+                if isinstance(result, list) and len(result) > 0 and 'firstName' in result[0]:
+                    # Format users nicely
+                    formatted = f"**Found {len(result)} user(s):**\n\n"
+                    for i, user in enumerate(result, 1):
+                        role_name = user.get('role', {}).get('name', 'Unknown')
+                        formatted += f"**{i}. {user['firstName']} {user['lastName']}**\n"
+                        formatted += f"- 📧 Email: {user['email']}\n"
+                        formatted += f"- 🔧 Role: {role_name}\n"
+                        formatted += f"- 📊 Status: {'✅ Active' if user.get('isActive') else '❌ Inactive'}\n\n"
+                    st.markdown(formatted)
+                else:
+                    st.json(result)
         except Exception as e:
             st.error(f"Error: {str(e)}")
 
@@ -281,9 +292,24 @@ with tab1:
                     if response and response.status_code in [200, 201]:
                         result_data = response.json()
                         
-                        # Format response
-                        if isinstance(result_data, list):
-                            response_text = f"✅ Found {len(result_data)} items"
+                        # Format response based on type
+                        if isinstance(result_data, list) and len(result_data) > 0:
+                            if 'firstName' in result_data[0]:
+                                # Format users
+                                response_text = f"**Found {len(result_data)} user(s):**\n\n"
+                                for i, user in enumerate(result_data, 1):
+                                    role_name = user.get('role', {}).get('name', 'Unknown')
+                                    response_text += f"{i}. **{user['firstName']} {user['lastName']}**\n"
+                                    response_text += f"   📧 {user['email']} | 🔧 {role_name}\n\n"
+                            elif 'name' in result_data[0] and 'permissions' in result_data[0]:
+                                # Format roles
+                                response_text = f"**Found {len(result_data)} role(s):**\n\n"
+                                for i, role in enumerate(result_data, 1):
+                                    perms = ', '.join(role.get('permissions', []))
+                                    response_text += f"{i}. **{role['name']}**: {role['description']}\n"
+                                    response_text += f"   🔑 Permissions: {perms}\n\n"
+                            else:
+                                response_text = f"✅ Found {len(result_data)} items"
                         else:
                             response_text = "✅ Operation successful"
                         

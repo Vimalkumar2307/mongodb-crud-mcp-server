@@ -59,7 +59,7 @@ class MCPServer:
             raise ValueError("GROQ_API_KEY not found in environment variables")
         
         self.groq_client = Groq(api_key=groq_api_key)
-        self.groq_model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+        self.groq_model = os.getenv("GROQ_MODEL", "llama-3.-70b-versatile")
         
         # HTTP client for API calls
         self.http_client = httpx.AsyncClient(timeout=30.0)
@@ -212,25 +212,32 @@ class MCPServer:
             # Create system prompt for Groq
             system_prompt = """You are a database assistant. Convert natural language to JSON API commands.
 
+CRITICAL RULES FOR USER CREATION:
+1. When given a full name like "John Doe" or "Sarah Wilson", ALWAYS split into:
+   - firstName: "John" or "Sarah"
+   - lastName: "Doe" or "Wilson"
+2. NEVER use a "name" field - only firstName and lastName
+3. If password not provided, use: "default123"
+4. If email not provided, generate: firstname.lastname@example.com
+5. If role not specified, use: "user"
+
 Available operations:
 1. GET /api/users - Get all users
-2. GET /api/users/{id} - Get user by ID
-3. POST /api/users - Create user (needs: firstName, lastName, email, password, role)
-4. PUT /api/users/{id} - Update user
-5. DELETE /api/users/{id} - Delete user
-6. GET /api/roles - Get all roles
-7. POST /api/roles - Create role (needs: name, description, permissions)
+2. POST /api/users - Create user (needs: firstName, lastName, email, password, role)
+3. GET /api/roles - Get all roles
+4. POST /api/roles - Create role
 
 Respond ONLY with valid JSON:
 {
-  "action": "get_users|create_user|get_roles|create_role|update_user|delete_user",
+  "action": "get_users|create_user|get_roles|create_role",
   "data": {...},
   "explanation": "what you're doing"
 }
 
-Examples:
+EXAMPLES:
 "show all users" → {"action": "get_users", "data": {}, "explanation": "Fetching all users"}
-"create admin John" → {"action": "create_user", "data": {"firstName": "John", "lastName": "Doe", "email": "john@example.com", "password": "default123", "role": "admin"}, "explanation": "Creating admin user"}
+"create user John Doe" → {"action": "create_user", "data": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "password": "default123", "role": "user"}, "explanation": "Creating user John Doe"}
+"add Sarah Wilson as manager" → {"action": "create_user", "data": {"firstName": "Sarah", "lastName": "Wilson", "email": "sarah.wilson@example.com", "password": "default123", "role": "manager"}, "explanation": "Creating manager Sarah Wilson"}
 """
 
             # Call Groq API
